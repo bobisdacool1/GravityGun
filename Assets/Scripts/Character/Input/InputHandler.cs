@@ -11,11 +11,6 @@ namespace Character.Input
 		public event AxisChange OnMouseXAxisChange;
 		public event AxisChange OnMouseYAxisChange;
 
-		public InputHandler()
-		{
-			
-		}
-		
 		public void HandleInput()
 		{
 			checkAxisAndExecuteEvent(Axis.Horizontal, OnHorizontalAxisChange);

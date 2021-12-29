@@ -13,11 +13,11 @@
 		}
 		public static string MouseX
 		{
-			get { return "Vertical"; }
+			get { return "Mouse X"; }
 		}
 		public static string MouseY
 		{
-			get { return "Vertical"; }
+			get { return "Mouse Y"; }
 		}
 	}
 }
