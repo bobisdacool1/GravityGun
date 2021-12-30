@@ -7,8 +7,9 @@ namespace Character
 	{
 		public float MovementMultiplier = 10.0f;
 		public float RotationMultiplier = 100.0f;
-		public Transform Player;
-		public Transform Camera;
+		
+		private Transform _player;
+		private Transform _camera;
 
 		public void InitializeInputEvents(InputHandler inputHandler)
 		{
@@ -18,39 +19,39 @@ namespace Character
 			inputHandler.OnMouseYAxisChange += RotatePitch;
 		}
 
-		public void SetMovementTarget(Transform target)
+		public void SetPlayerTransform(Transform target)
 		{
-			Player = target;
+			_player = target;
 		}
 		
-		public void SetRotateTarget(Transform target)
+		public void SetCameraTransform(Transform target)
 		{
-			Camera = target;
+			_camera = target;
 		}
 
 
 		private void MoveAcrossZ(float movementValue)
 		{
 			float movement = movementValue * MovementMultiplier * Time.deltaTime;
-			Player.Translate(0, 0, movement);
+			_player.Translate(0, 0, movement);
 		}
 		
 		private void MoveAcrossX(float movementValue)
 		{
 			float movement = movementValue * MovementMultiplier * Time.deltaTime;
-			Player.Translate(movement, 0, 0);
+			_player.Translate(movement, 0, 0);
 		}
 
 		private void RotateYaw(float rotationValue)
 		{
 			float rotation = rotationValue * RotationMultiplier * Time.deltaTime;
-			Player.Rotate(0, rotation, 0);
+			_player.Rotate(0, rotation, 0);
 		}
 		
 		private void RotatePitch(float rotationValue)
 		{
 			float rotation = rotationValue * RotationMultiplier * Time.deltaTime * -1.0f;
-			Camera.Rotate(rotation, 0, 0);
+			_camera.Rotate(rotation, 0, 0);
 		}
 	}
 }

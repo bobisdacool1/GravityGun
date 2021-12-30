@@ -1,4 +1,5 @@
-﻿using Character.Input;
+﻿using Character.Guns;
+using Character.Input;
 
 namespace Character
 {

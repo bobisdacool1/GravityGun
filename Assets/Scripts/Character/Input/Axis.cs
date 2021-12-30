@@ -11,13 +11,20 @@
 		{
 			get { return "Vertical"; }
 		}
+
 		public static string MouseX
 		{
 			get { return "Mouse X"; }
 		}
+
 		public static string MouseY
 		{
 			get { return "Mouse Y"; }
+		}
+
+		public static string Fire1
+		{
+			get { return "Fire1"; }
 		}
 	}
 }
