@@ -6,17 +6,15 @@ namespace Character
 	public class Movement
 	{
 		public float MovementMultiplier = 10.0f;
-		public float RotationMultiplier = 100.0f;
+		public float RotationMultiplier = 1000.0f;
 		
 		private Transform _player;
 		private Transform _camera;
 
 		public void InitializeInputEvents(InputHandler inputHandler)
 		{
-			inputHandler.OnVerticalAxisChange += MoveAcrossZ;
-			inputHandler.OnHorizontalAxisChange += MoveAcrossX;
-			inputHandler.OnMouseXAxisChange += RotateYaw;
-			inputHandler.OnMouseYAxisChange += RotatePitch;
+			inputHandler.InputMovement.OnMovingAxisChange += MoveCharacter;
+			inputHandler.InputMovement.OnRotationAxisChange += RotateCharacter;
 		}
 
 		public void SetPlayerTransform(Transform target)
@@ -29,29 +27,17 @@ namespace Character
 			_camera = target;
 		}
 
-
-		private void MoveAcrossZ(float movementValue)
+		private void MoveCharacter(Vector3 movementDirection)
 		{
-			float movement = movementValue * MovementMultiplier * Time.deltaTime;
-			_player.Translate(0, 0, movement);
-		}
-		
-		private void MoveAcrossX(float movementValue)
-		{
-			float movement = movementValue * MovementMultiplier * Time.deltaTime;
-			_player.Translate(movement, 0, 0);
+			movementDirection *= MovementMultiplier * Time.deltaTime;
+			_player.Translate(movementDirection);
 		}
 
-		private void RotateYaw(float rotationValue)
+		private void RotateCharacter(Vector3 rotation)
 		{
-			float rotation = rotationValue * RotationMultiplier * Time.deltaTime;
-			_player.Rotate(0, rotation, 0);
-		}
-		
-		private void RotatePitch(float rotationValue)
-		{
-			float rotation = rotationValue * RotationMultiplier * Time.deltaTime * -1.0f;
-			_camera.Rotate(rotation, 0, 0);
+			rotation *= RotationMultiplier * Time.deltaTime;
+			_camera.Rotate(rotation.x, 0, 0);
+			_player.Rotate(0, rotation.y, 0);
 		}
 	}
 }

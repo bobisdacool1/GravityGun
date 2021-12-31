@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Destroyable : MonoBehaviour
@@ -8,12 +6,11 @@ public class Destroyable : MonoBehaviour
     [SerializeField] private float liveTime;
     
     public delegate void ObjectDestroyEvent(GameObject destroyedGameObject);
-
     public event ObjectDestroyEvent OnObjectDestroy;
 
-    public void Start()
+    private void Start()
     {
-        StartCoroutine(WaitAndDestroy(liveTime));
+        StartCoroutine(DestroyInSeconds(liveTime));
     }
 
     public void ImmediatelyDestroy()
@@ -22,12 +19,10 @@ public class Destroyable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator WaitAndDestroy(float objectLiveTime)
+    public IEnumerator DestroyInSeconds(float objectLiveTime)
     {
         yield return new WaitForSeconds(objectLiveTime);
         
-        OnObjectDestroy?.Invoke(gameObject);
-        Destroy(gameObject);
-
+        ImmediatelyDestroy();
     }
 }

@@ -26,5 +26,10 @@
 		{
 			get { return "Fire1"; }
 		}
+		
+		public static string Empty
+		{
+			get { return "Empty"; }
+		}
 	}
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using Character.Input;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
 namespace Character.Guns
 {
@@ -14,15 +11,15 @@ namespace Character.Guns
 
 		public void Start()
 		{
-			mainCharacter.GetInputHandler().OnFireButtonClick += Shot;
+			mainCharacter.GetInputHandler().InputActions.OnFireButtonPressed += Shot;
 		}
 
 		private void Shot()
 		{
-			GameObject shell = Instantiate(shellPrefab, shellSpawnPoint.position, mainCharacter.getCameraTransform().rotation, null);
+			GameObject shell = Instantiate(shellPrefab, shellSpawnPoint.position, 
+				mainCharacter.GetCameraTransform().rotation, null);
 
 			Vector3 velocity = transform.forward * velocityMultiplier;
-			
 			shell.GetComponent<Rigidbody>().AddForce(velocity);
 		}
 	}

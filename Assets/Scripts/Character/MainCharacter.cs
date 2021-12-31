@@ -1,5 +1,4 @@
-﻿using System;
-using Character.Input;
+﻿using Character.Input;
 using UnityEngine;
 
 namespace Character
@@ -7,17 +6,13 @@ namespace Character
 	public class MainCharacter : MonoBehaviour
 	{
 		[SerializeField] private Transform cameraTransform;
-		
+
 		private Utils _utils;
-		
+
 		public void Awake()
 		{
-			//todo: fix this awful thing
 			RemoveCursor();
-		}
 
-		public void OnEnable()
-		{
 			_utils = new Utils();
 			InitializeMovement();
 		}
@@ -32,7 +27,7 @@ namespace Character
 			return _utils.InputHandler;
 		}
 
-		public Transform getCameraTransform()
+		public Transform GetCameraTransform()
 		{
 			return cameraTransform;
 		}
@@ -46,6 +41,7 @@ namespace Character
 
 		private void RemoveCursor()
 		{
+			//todo: fix this awful thing, i goto move this to some UI script or something
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}

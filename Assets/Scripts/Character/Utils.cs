@@ -1,12 +1,11 @@
-﻿using Character.Guns;
-using Character.Input;
+﻿using Character.Input;
 
 namespace Character
 {
 	public class Utils
 	{
-		public Movement Movement;
-		public InputHandler InputHandler;
+		public readonly Movement Movement;
+		public readonly InputHandler InputHandler;
 		public Utils()
 		{
 			InputHandler = new InputHandler();
