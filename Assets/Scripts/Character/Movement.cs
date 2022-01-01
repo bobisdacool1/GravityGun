@@ -1,43 +1,45 @@
-﻿using Character.Input;
+﻿using System.Collections;
+using Character.Input;
 using UnityEngine;
 
 namespace Character
 {
-	public class Movement
+	[RequireComponent(typeof(Rigidbody))]
+	public class Movement : MonoBehaviour
 	{
-		public float MovementMultiplier = 10.0f;
-		public float RotationMultiplier = 1000.0f;
-		
-		private Transform _player;
-		private Transform _camera;
+		[SerializeField] private float movementMultiplier = 10.0f;
+		[SerializeField] private float rotationMultiplier = 1000.0f;
+		[SerializeField] private float jumpForce = 250.0f;
+
+		[SerializeField] private MainCharacter character;
+
 
 		public void InitializeInputEvents(InputHandler inputHandler)
 		{
 			inputHandler.InputMovement.OnMovingAxisChange += MoveCharacter;
 			inputHandler.InputMovement.OnRotationAxisChange += RotateCharacter;
-		}
-
-		public void SetPlayerTransform(Transform target)
-		{
-			_player = target;
-		}
-		
-		public void SetCameraTransform(Transform target)
-		{
-			_camera = target;
+			inputHandler.InputMovement.OnJumpButtonClick += Jump;
 		}
 
 		private void MoveCharacter(Vector3 movementDirection)
 		{
-			movementDirection *= MovementMultiplier * Time.deltaTime;
-			_player.Translate(movementDirection);
+			movementDirection *= movementMultiplier * Time.deltaTime;
+			character.transform.Translate(movementDirection);
 		}
 
 		private void RotateCharacter(Vector3 rotation)
 		{
-			rotation *= RotationMultiplier * Time.deltaTime;
-			_camera.Rotate(rotation.x, 0, 0);
-			_player.Rotate(0, rotation.y, 0);
+			rotation *= rotationMultiplier * Time.deltaTime;
+			character.GetCameraTransform().Rotate(rotation.x, 0, 0);
+			character.transform.Rotate(0, rotation.y, 0);
+		}
+
+		private void Jump()
+		{
+			Rigidbody characterRigidbody = GetComponent<Rigidbody>();
+			
+			if (characterRigidbody.velocity.y == 0)
+				characterRigidbody.AddForce(Vector3.up * jumpForce * characterRigidbody.mass);
 		}
 	}
 }

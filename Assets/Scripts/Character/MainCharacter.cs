@@ -3,40 +3,35 @@ using UnityEngine;
 
 namespace Character
 {
+	[RequireComponent(typeof(Movement))]
 	public class MainCharacter : MonoBehaviour
 	{
 		[SerializeField] private Transform cameraTransform;
+		[SerializeField] private Movement characterMovement;
 
-		private Utils _utils;
+		private Utils utils;
 
 		public void Awake()
 		{
 			RemoveCursor();
 
-			_utils = new Utils();
-			InitializeMovement();
+			utils = new Utils();
+			characterMovement.InitializeInputEvents(utils.InputHandler);
 		}
 
 		public void Update()
 		{
-			_utils.InputHandler.HandleInput();
+			utils.InputHandler.HandleInput();
 		}
 
 		public InputHandler GetInputHandler()
 		{
-			return _utils.InputHandler;
+			return utils.InputHandler;
 		}
 
 		public Transform GetCameraTransform()
 		{
 			return cameraTransform;
-		}
-
-		private void InitializeMovement()
-		{
-			_utils.Movement.InitializeInputEvents(_utils.InputHandler);
-			_utils.Movement.SetPlayerTransform(transform);
-			_utils.Movement.SetCameraTransform(cameraTransform);
 		}
 
 		private void RemoveCursor()

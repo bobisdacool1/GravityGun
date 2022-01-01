@@ -30,6 +30,11 @@
 		public static string Empty
 		{
 			get { return "Empty"; }
+		}	
+		
+		public static string Jump
+		{
+			get { return "Jump"; }
 		}
 	}
 }
