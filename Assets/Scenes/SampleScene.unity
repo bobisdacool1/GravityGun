@@ -1367,7 +1367,7 @@ MonoBehaviour:
   movementMultiplier: 10
   rotationMultiplier: 500
   jumpForce: 250
-  character: {fileID: 624602326}
+  character: {fileID: 624602327}
 --- !u!54 &624602329
 Rigidbody:
   m_ObjectHideFlags: 0

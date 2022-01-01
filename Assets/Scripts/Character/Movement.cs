@@ -38,7 +38,7 @@ namespace Character
 		{
 			Rigidbody characterRigidbody = GetComponent<Rigidbody>();
 			
-			if (characterRigidbody.velocity.y == 0)
+			if (characterRigidbody.velocity.normalized.y == 0)
 				characterRigidbody.AddForce(Vector3.up * jumpForce * characterRigidbody.mass);
 		}
 	}
